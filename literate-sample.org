@@ -1,0 +1,128 @@
+* A beginning
+
+Emacs people are, in a lot of cases, crazy.
+
+* Literate Programming
+Donald Knuth invention. Instead of adding comments to your code, you add code to your documentation. The document becomes executable
+
+* Org Mode and Babel
+
+The massive org-mode and its babel extension are the basis of literate programming on emacs. org-mode is an universe on itself.
+
+So what is babel?
+https://orgmode.org/worg/org-contrib/babel/languages.html
+
+Languages supported
+https://orgmode.org/worg/org-contrib/babel/languages.html
+
+* Example code
+We could have here some kind of documentation, like the fact that we want to sum 5 to all numbers.
+
+#+BEGIN_SRC elixir
+  defmodule IntroLiterate do
+    def sum_5(number), do: number + 5
+  end
+
+  IntroLiterate.sum_5(4)
+#+END_SRC
+
+We move then into the code block and execute C-c C-c to get results. C-c C-v k to eliminate the results.
+
+* Emacs config
+* Example code 2
+
+We can move to an edit mode based on the language using C-c '
+
+#+BEGIN_SRC elixir
+
+#+END_SRC
+
+* Example Shell
+
+What about something else, like the shell?
+
+#+BEGIN_SRC sh
+  ls
+#+END_SRC
+
+#+RESULTS:
+| config               |
+| lib                  |
+| literate-sample.org  |
+| literate-sample.org~ |
+| mix.exs              |
+| README.md            |
+| test                 |
+
+* Example Headers
+
+We can add headers to the code block. Either directly on the BEGIN_SRC line
+
+#+BEGIN_SRC sh :dir ~/code/mango
+ls
+#+END_SRC
+
+or on a separate line called HEADER.
+
+#+HEADER: :var JOSE="pepe"
+#+BEGIN_SRC sh
+  echo $JOSE
+#+END_SRC
+
+The var above is dependent on the language used. On this case, sh, is an enviroment variable. 
+
+* Sessions
+
+We have another header called session
+
+#+BEGIN_SRC ruby :session foo
+  theanswer = 42
+#+END_SRC
+
+Without it, we cannot link together to different code blocks.
+
+#+BEGIN_SRC ruby
+  theanswer / 2
+#+END_SRC
+
+We need to add it to have access to previous declarations.
+
+As a bonus, an example of var on ruby
+#+BEGIN_SRC ruby :session foo :var themul=4
+  theanswer * themul
+#+END_SRC
+
+* Literate Programming 2
+
+Tangling extracts, for files so marked, from the source sections and create the files out of them.
+
+#+BEGIN_SRC elixir :tangle example.iex
+  defmodule Sample do
+    def sum_3(number), do: number + 3
+  end
+#+END_SRC
+
+#+BEGIN_SRC sh
+  ls
+#+END_SRC
+
+#+BEGIN_SRC sh
+  cat example.iex
+#+END_SRC
+
+#+BEGIN_SRC sh
+  rm example.iex
+#+END_SRC
+
+#+BEGIN_SRC elixir
+  defmodule Sample2 do
+    def sum_4(number), do: number + 4
+  end
+#+END_SRC
+
+* "Issue"
+
+As far as I know literate programming is only possible on Emacs.
+
+* Slightly bigger intro
+http://howardism.org/Technical/Emacs/literate-programming-tutorial.html

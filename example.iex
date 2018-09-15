@@ -1,0 +1,7 @@
+defmodule Sample do
+  def sum_3(number), do: number + 3
+end
+
+defmodule Sample2 do
+  def sum_4(number), do: number + 4
+end
